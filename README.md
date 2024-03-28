@@ -6,15 +6,15 @@ The SVEN framework is described in the following manuscript: Yu Wang, Nan Liang 
 
 ## Installation
 
-#### Important Note: now we provide two modes for prediction: <i>Full mode</i> and <i>Fast mode</i>. For <i>Full mode</i>, you need download ~300G dependent files; while for <i>Fast mode</i>, you only need to download ~2G dependent files, with negligible precision loss. For reproducing results from our manuscript, please use <i>Full mode</i>.
+#### Important Note: now we provide two modes for prediction: <i>Full mode</i> and <i>Fast mode</i>. For <i>Full mode</i>, you need download ~300G dependent model parameters files; while for <i>Fast mode</i>, you only need to download ~2G dependent model parameters files, with negligible precision loss. For reproducing results from our manuscript, please use <i>Full mode</i>.
 
 Clone the repository then download and extract necessary resource files:
 ```bash
 git clone https://github.com/gao-lab/SVEN.git
 cd SVEN
-# Download resources
+# Download resources, ~1G
 sh download_resources.sh
-# Download model params for Fast mode
+# Download model params for Fast mode, ~2G
 sh download_model_params_fast.sh
 # For Full mode, coming soon
 # Extract dependent files
