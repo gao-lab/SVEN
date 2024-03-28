@@ -12,11 +12,13 @@ Clone the repository then download and extract necessary resource files:
 ```bash
 git clone https://github.com/gao-lab/SVEN.git
 cd SVEN
+
 # Download resources, ~1G
 sh download_resources.sh
 # Download model params for Fast mode, ~2G
 sh download_model_params_fast.sh
 # For Full mode, coming soon
+
 # Extract dependent files
 tar -xf resources.tar.gz
 tar -xf model_params.tar.gz
@@ -28,12 +30,15 @@ Install python (3.8), install TensorFlow (v2.5.0) following instructions from ht
 ```bash
 # One-hot encoding
 python prepare_data.py ./example/test.bed
+
 # Get functional annotations with CPUs in fast mode
 python get_annotations.py
 # OR Get functional annotations with GPU 0 in fast mode
 python get_annotations.py --gpu 0
+
 # Transform annotations
 python transform_annotations.py
+
 # Predict gene expression
 python predict_expression.py ./test.exp.predict.txt
 ```
