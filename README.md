@@ -27,6 +27,8 @@ Install python (3.8), install TensorFlow (v2.5.0) following instructions from ht
 
 ## Usage
 
+This is a quick guide for usage, the full guideline is coming soon.
+
 ```bash
 # One-hot encoding
 python prepare_data.py ./example/test.bed
