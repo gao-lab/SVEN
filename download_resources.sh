@@ -29,13 +29,13 @@ echo "Finished extracting resources."
 # download model parameters according to the mode
 if [ "$mode" = "fast" ]; then
     echo "Downloading model parameters (fast mode)..."
-    wget -c https://reva.gao-lab.org/download/sven/model_parameters_fast.tar.gz
+    wget -c https://reva.gao-lab.org/download/sven/model_params_fast.tar.gz
     echo "Extracting model parameters..."
     tar -xzf model_parameters_fast.tar.gz
     echo "Finished extracting model parameters."
 elif [ "$mode" = "full" ]; then
     echo "Downloading model parameters (full mode)..."
-    wget -c https://reva.gao-lab.org/download/sven/model_parameters_full.tar.gz
+    wget -c https://reva.gao-lab.org/download/sven/model_params_full.tar.gz
     echo "Extracting model parameters..."
     tar -xzf model_parameters_full.tar.gz
     echo "Finished extracting model parameters."
