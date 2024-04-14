@@ -1,4 +1,5 @@
 tensorflow==2.5.0
 h5py >=2.10.0
-xgboost>=1.6.1
+xgboost==2.0.1
 natsort>=8.4.0
+biopython>=1.83

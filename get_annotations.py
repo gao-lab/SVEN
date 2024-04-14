@@ -22,20 +22,6 @@ args = parser.parse_args()
 if args.gpu != "-1":
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 
-model_type=sys.argv[1]
-category=sys.argv[2]
-data_part=sys.argv[3]
-prefix_in=sys.argv[5]
-
-
-data_path="./"
-data_prefix=prefix_in+"_"
-#data_prefix="pre_"
-output_path="/lustre/grp/bitcap/wangy/SV/SVEN/small_variants/output2/anno/"
-data_indicator="X"
-#data_indicator="alt"
-output_prefix=prefix_in
-
 #define conv_block functions
 def conv_block(inputs, filters=128, kernel_size=1, strides=1, 
     dilation_rate=1, l2_scale=0, dropout=0, pool_size=1, bn_momentum=0.9,

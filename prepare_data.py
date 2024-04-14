@@ -1,20 +1,26 @@
 import argparse
+import os
+import subprocess
+import h5py
+import numpy as np
 from Bio import SeqIO
 from Bio.Seq import Seq
-import h5py
-import subprocess
-import os
+
 
 parser = argparse.ArgumentParser(description='Prepare data for training')
 parser.add_argument('inputbed', type = str, help = 'Input bed file')
 parser.add_argument('--work_dir', type = str, default = "./work_dir/", help = 'Work directory')
-
+parser.add_argument('--bedtools_path', type = str, default = "bedtools", help = 'Path to bedtools')
 args = parser.parse_args()
 
 ref_genome = "./resources/hg38.fa"
 # create temp dir
 if not os.path.exists(args.work_dir):
     os.makedirs(args.work_dir)
+# check if bedtools is installed
+
+if subprocess.call("command -v bedtools", shell=True) != 0:
+    raise Exception("bedtools is not installed. Please install bedtools first.")
 
 def extract_seq(inputbed):
     # cp inputbed to work_dir
@@ -23,7 +29,7 @@ def extract_seq(inputbed):
     # extract sequences from bed file
     in_bed = args.work_dir + "temp.bed"
     out_fasta = args.work_dir + "temp.fa"
-    cmd = 'bedtools getfasta -s -fi %s -bed %s -fo %s' % (ref_genome, in_bed, out_fasta)
+    cmd = args.bedtools_path + ' getfasta -s -fi %s -bed %s -fo %s' % (ref_genome, in_bed, out_fasta)
     subprocess.call(cmd, shell=True)
     print("Success: extract sequences from bed file.")
 

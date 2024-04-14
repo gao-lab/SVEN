@@ -5,10 +5,12 @@ import xgboost as xgb
 parser = argparse.ArgumentParser(description='Predict expression')
 parser.add_argument('output_file', type = str, help = 'Output file')
 parser.add_argument('--work_dir', type = str, default = "./work_dir/", help = 'Work directory')
+parser.add_argument('--mode', type = str, default = "fast", help = 'Prediction mode')
+parser.add_argument('--verbose', type = bool, default = True, help = 'Verbose mode, only work when target_idx is None')
+parser.add_argument('--target_idx', type = int, default = None, help = 'Target Model Index')
 
 
 args = parser.parse_args()
-
 
 
 #filter feature according to cutoff
@@ -26,7 +28,7 @@ def get_utr_features():
     for i in range(bed_info.shape[0]):
         gene_name = bed_info[i][6]
         gene_index = np.where(utr_features[:,0] == gene_name)[0][0]
-        utr_out.append(utr_features[gene_index,1:].astype(float))
+        utr_out.append(utr_features[gene_index,1:17].astype(float))
     utr_out = np.array(utr_out)
     return utr_out
 
@@ -38,10 +40,31 @@ def generate_model_anno(eid, anno_whole, anno_utr):
     anno_model=np.hstack((anno_model,anno_utr))
     return anno_model
 
-if __name__ == "__main__":
-    model_path = "./resources/models/fast_mode/"
-    model_feature_idx_dir = model_path + "model_feature_index/"
+def _model_predict_fast(eid, model_anno):
+    model_param = model_path + "xgb_" + str(eid) + ".json"
+    if len(model_anno.shape) == 1:
+        model_anno = model_anno.reshape(1, -1)
+    xgb_model=xgb.XGBRegressor()
+    xgb_model.load_model(model_param)
+    exp_tmp = xgb_model.predict(model_anno)
+    return exp_tmp
 
+def _model_predict(eid, anno_whole, anno_utr):
+    model_param = model_path + "xgb_" + str(eid) + ".json"
+    model_anno = generate_model_anno(eid, anno_whole, anno_utr)
+    if len(model_anno.shape) == 1:
+        model_anno = model_anno.reshape(1, -1)
+    xgb_model=xgb.XGBRegressor()
+    xgb_model.load_model(model_param)
+    exp_tmp = xgb_model.predict(model_anno)
+    return exp_tmp
+
+
+
+if __name__ == "__main__":
+    if args.mode == "fast":
+        model_path = "./models/fast_mode/"
+    
     print("Loading annotations...")
     anno_acc = np.load(args.work_dir + "annotations/transformed/class_acc_transformed.npy")
     anno_his = np.load(args.work_dir + "annotations/transformed/class_his_transformed.npy")
@@ -52,14 +75,33 @@ if __name__ == "__main__":
     anno_whole = np.concatenate((anno_acc, anno_his, anno_tf), axis = -1)
     anno_whole = anno_whole[:,:,filter_index].reshape(anno_whole.shape[0], -1)
     
-    print("Predict expression...")
-    pred_exp = np.empty((anno_whole.shape[0], 218), dtype = np.float32)
-    for eid in range(218):
-        model_param = model_path + "xgb_" + str(eid) + ".model"
-        model_anno = generate_model_anno(eid, anno_whole, anno_utr)
-        xgb_model=xgb.XGBRegressor()
-        xgb_model.load_model(model_param)
-        exp_tmp = xgb_model.predict(model_anno)
-        pred_exp[:, eid] = exp_tmp.reshape(exp_tmp.shape[0],1)
-    np.savetxt(args.output_file, pred_exp, delimiter = "\t")
+    if args.mode == "fast":
+        anno_model=np.hstack((anno_whole,anno_utr))
+    
+    if args.target_idx is None:
+        print("Predict expression with all models...")
+        total = 218
+        pred_exp = np.empty((anno_whole.shape[0], total), dtype = np.float32)   
+        for eid in range(total):
+            if args.mode == "fast":
+                exp_tmp = _model_predict_fast(eid, anno_model)
+            pred_exp[:, eid] = exp_tmp
+            # print progress bar
+            if args.verbose:
+                progress = (eid + 1) / total
+                print('\r[{0}] {1}%'.format('#'*(int(progress*50)), int(progress*100)), end='')
+        np.savetxt(args.output_file, pred_exp, delimiter = "\t")
+        print("\n")
+    else:
+        print("Predict expression with model %d..." % args.target_idx)
+        #check args.target_idx is int, between 0 and 217
+        if not isinstance(args.target_idx, int):
+            raise ValueError("target_idx must be an integer.")
+        if args.target_idx < 0 or args.target_idx > 217:
+            raise ValueError("target_idx must be an integer between 0 and 217.")
+        if args.mode == "fast":
+            exp_tmp = _model_predict_fast(args.target_idx, anno_model)
+        if len(exp_tmp.shape) == 1:
+            exp_tmp = exp_tmp.reshape(-1, 1)
+        np.savetxt(args.output_file, exp_tmp, delimiter = "\t")      
     print("Success: expression prediction.")
