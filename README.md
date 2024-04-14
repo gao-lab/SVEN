@@ -42,7 +42,8 @@ python get_annotations.py --gpu 0
 python transform_annotations.py
 
 # Predict gene expression
-python predict_expression.py ./test.exp.predict.txt
+python predict_expression.py ./test.exp.predict.txt # with all models
+python predict_expression.py ./test.exp.predict.txt --target_idx 3 # with target model
 ```
 
 ## Contact
