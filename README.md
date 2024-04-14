@@ -13,15 +13,10 @@ Clone the repository then download and extract necessary resource files:
 git clone https://github.com/gao-lab/SVEN.git
 cd SVEN
 
-# Download resources, ~1G
+# Download and extract resources and model parameters, default for fast mode
 sh download_resources.sh
-# Download model params for Fast mode, ~2G
-sh download_model_params_fast.sh
-# For Full mode, coming soon
-
-# Extract dependent files
-tar -xf resources.tar.gz
-tar -xf model_params.tar.gz
+# for full mode
+sh download_resources.sh -m full
 ```
 Install python (3.8), install TensorFlow (v2.5.0) following instructions from https://www.tensorflow.org/ and bedtools from https://bedtools.readthedocs.io/. Use `pip install -r requirements.txt` to install the other dependencies.
 
