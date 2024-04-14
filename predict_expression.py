@@ -80,7 +80,7 @@ if __name__ == "__main__":
     
     if args.target_idx is None:
         print("Predict expression with all models...")
-        total = 218
+        total = 365
         pred_exp = np.empty((anno_whole.shape[0], total), dtype = np.float32)   
         for eid in range(total):
             if args.mode == "fast":
