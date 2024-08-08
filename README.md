@@ -122,11 +122,11 @@ python predict_effect.py --cutoff 0.5 # with custom cutoff
 | ```./work_dir/output/effect_snv.txt``` | Predicted effects of small noncoding variants. Column: effect size, label (based on given cutoff, 1 for functional variant and 0 for non-functional variant.) |
 
 
-#### Customize your own SVEN model
+## Customize your own SVEN model
 As a framework with high flexibility, you can customize your own SVEN models. 
 
 Necessary files: Tss of genes ```./resources/tss_gene_list.txt```, corresponding mRNA decay features (or other features; if you want to use sequence only, you may not provide it) ```./resources/utr_features.txt``` and corresponding gene expression profile (example is the expression profile from 53 GTEx tissues)  ```./resources/gene_exp.txt```.
-##### (1) Prepare sequences and get functional annotations.
+#### (1) Prepare sequences and get functional annotations.
 ```bash
 # You can use our annotation module:
 python prepare_data.py ./resources/tss_gene_list.txt
@@ -137,7 +137,7 @@ python get_annotations.py --gpu 0 # or with --mode full
 python prepare_data.py ./resources/tss_gene_list.txt --seq_len 393216
 python custom_sven.py --action enformer_predict --enformer_path ENFORMER_MODEL_PATH
 ```
-##### (2) Transform functional annotations.
+#### (2) Transform functional annotations.
 ```bash
 # For our annotation module:
 python transform_annotations.py # or with --mode full
@@ -145,7 +145,7 @@ python transform_annotations.py # or with --mode full
 # For Enformer annotations with custom decay_list:
 python custom_sven.py --action enformer_transform --decay_list "0.01, 0.10, 0.20"
 ```
-##### (3) Train expression prediction models.
+#### (3) Train expression prediction models.
 Build-in models: XGBoost model and elasticNet. You can modify model's parameters in ```train_xgb() and train_elasticNet()``` or add more models in ```./sven/train.py```
 ```bash
 # Train xgb model with default setting on first cell line/tissue in gene expression profile
