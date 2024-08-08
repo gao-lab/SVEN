@@ -1,0 +1,6 @@
+Chr_info	TSS_pos	Strand	Gene_name
+chr1	169893896	-	SCYL3
+chr1	169795045	+	C1orf112
+chr1	27635143	-	FGR
+chr1	196652044	+	CFH
+
