@@ -24,9 +24,9 @@ def process_data(category, output_prefix):
         pred_file = args.work_dir + "annotations/" + output_prefix + "_" + category + ".npy"
     elif args.mode == "full":
         if category != "acc":
-            pred_file = args.work_dir + "annotations/" + output_prefix + "_" + ".full.npy"
+            pred_file = args.work_dir + "annotations/" + output_prefix + "_" + category + ".full.npy"
         else:
-            pred_file = args.work_dir + "annotations/" + output_prefix + "_" + ".npy"
+            pred_file = args.work_dir + "annotations/" + output_prefix + "_" + category + ".npy"
     else:
         raise ValueError("Mode not found. Please use 'fast' or 'full'.")
     
