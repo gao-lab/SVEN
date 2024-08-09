@@ -15,7 +15,7 @@ def replace_anno(category, anno_path, output_prefix):
     sep_anno_path = anno_path + category + "_" + output_prefix + "_tmp/"
 
     # load holistic annotations
-    hol_anno = np.load(anno_path + "class_" + category + ".npy")
+    hol_anno = np.load(anno_path + output_prefix + "_" + category + ".npy")
 
     output_file = anno_path + output_prefix + "_" + category + ".full.npy"
 
