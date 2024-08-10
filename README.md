@@ -6,7 +6,8 @@ The SVEN framework is described in the following manuscript: Yu Wang, Nan Liang 
 
 ## Installation
 
-#### Important Note: now we provide two modes for prediction: <i>Full mode</i> and <i>Fast mode</i>. For <i>Full mode</i>, you need download ~380G dependent model parameters files; while for <i>Fast mode</i>, you only need to download ~2G dependent model parameters files, with negligible precision loss. For reproducing results from our manuscript, please use <i>Full mode</i>.
+> [!NOTE]
+>  Now we provide two modes for prediction: <i>Full mode</i> and <i>Fast mode</i>. For <i>Full mode</i>, you need download ~380G dependent model parameters files; while for <i>Fast mode</i>, you only need to download ~2G dependent model parameters files, with negligible precision loss. For reproducing results from our manuscript, please use <i>Full mode</i>.
 
 Clone the repository then download and extract necessary resource files:
 ```bash
