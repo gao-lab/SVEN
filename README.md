@@ -1,4 +1,15 @@
 # SVEN
+
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Predict gene expression level based on TSS of genes](#predict-gene-expression-level-based-on-tss-of-genes)
+    - [Predict effects of SVs on gene expression level](#predict-effects-of-svs-on-gene-expression-level)
+    - [Predict functional effects of small noncoding variants](#predict-functional-effects-of-small-noncoding-variants)
+- [Customize your own SVEN model](#customize-your-own-sven-model)
+    - [Prepare sequences and get functional annotations](#1-prepare-sequences-and-get-functional-annotations)
+    - [Transform functional annotations](#2-transform-functional-annotations)
+    - [Train expression prediction models](#3-train-expression-prediction-models)
+
 This repository contains code for SVEN, a multi-modality sequence-oriented <i>in silico</i> model, for quantifying genetic variants' regulatory impacts in over 350 tissues and cell lines.
 
 The SVEN framework is described in the following manuscript: Yu Wang, Nan Liang and Ge Gao, [Quantify genetic variants' regulatory potential via a hybrid sequence-oriented model](https://www.biorxiv.org/content/10.1101/2024.03.28.587115v1), bioRxiv (2024).
@@ -7,7 +18,7 @@ The SVEN framework is described in the following manuscript: Yu Wang, Nan Liang 
 ## Installation
 
 > [!NOTE]
->  Now we provide two modes for prediction: <b>Full mode</b> and <b>Fast mode</b>. For <b>Full mode</b>, you need download ~380G dependent model parameters files; while for <b>Fast mode</b>, you only need to download ~2G dependent model parameters files, with negligible precision loss. We recommend using <b>Fast mode</b>. For reproducing results from our manuscript, please use <b>Full mode</b>.
+> Now we provide two modes for prediction: **_Full mode_** and **_Fast mode_**. For reproducing results from our manuscript, please use **_Full mode_**; otherwise, we recommend using **_Fast mode_** with negligible precision loss. 
 
 Clone the repository then download and extract necessary resource files:
 ```bash
@@ -15,9 +26,9 @@ git clone https://github.com/gao-lab/SVEN.git
 cd SVEN
 
 # Download and extract resources and model parameters, default for fast mode
-sh download_resources.sh
+sh download_resources.sh # ~2G
 # For full mode
-sh download_resources.sh -m full
+sh download_resources.sh -m full # ~380G
 ```
 
 We recommend using mamba or conda environment. Please check install instructions of mamba from https://github.com/mamba-org/mamba, Tensorflow from https://www.tensorflow.org/ and bedtools from https://bedtools.readthedocs.io/ for more details. 
