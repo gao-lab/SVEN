@@ -1,5 +1,6 @@
-# SVEN
+<img src="./image/SVEN-logo.png" alt="SVEN logo" width="200"/>
 
+# SVEN
 - [Installation](#installation)
 - [Usage](#usage)
     - [Predict gene expression level based on TSS of genes](#predict-gene-expression-level-based-on-tss-of-genes)
