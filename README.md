@@ -15,6 +15,7 @@ This repository contains code for SVEN, a multi-modality sequence-oriented <i>in
 
 The SVEN framework is described in the following manuscript: Yu Wang, Nan Liang and Ge Gao, [Quantify genetic variants' regulatory potential via a hybrid sequence-oriented model](https://www.biorxiv.org/content/10.1101/2024.03.28.587115v1), bioRxiv (2024).
 
+![Model architecture](./image/SVEN-model.jpg)
 
 ## Installation
 
