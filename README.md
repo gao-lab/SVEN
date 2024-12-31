@@ -13,7 +13,7 @@
 
 This repository contains code for SVEN, a multi-modality sequence-oriented <i>in silico</i> model, for quantifying genetic variants' regulatory impacts in over 350 tissues and cell lines.
 
-The SVEN framework is described in the following manuscript: Yu Wang, Nan Liang and Ge Gao, [Quantify genetic variants' regulatory potential via a hybrid sequence-oriented model](https://www.biorxiv.org/content/10.1101/2024.03.28.587115v1), bioRxiv (2024).
+The SVEN framework is described in the following manuscript: Yu Wang, Nan Liang and Ge Gao, [Quantifying the regulatory potential of genetic variants via a hybrid sequence-oriented model with SVEN](https://doi.org/10.1038/s41467-024-55392-7), <i>Nat. Commun.</i> <b>15</b>, 10917 (2024).
 
 ![Model architecture](./image/SVEN-model.jpg)
 
