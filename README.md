@@ -57,7 +57,8 @@ pip3 install -r requirements.txt
 
 
 ## Usage
-
+> [!NOTE]
+> SVEN was trained and evaluated based on reference genome <b>GRCh38</b>.
 #### Predict gene expression level based on TSS of genes
 
 ```bash
