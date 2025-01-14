@@ -31,13 +31,13 @@ if [ "$mode" = "fast" ]; then
     echo "Downloading model parameters (fast mode)..."
     wget -c http://ftp.cbi.pku.edu.cn/pub/SVEN/model_params_fast.tar.gz
     echo "Extracting model parameters..."
-    tar -xzf model_parameters_fast.tar.gz
+    tar -xzf model_params_fast.tar.gz
     echo "Finished extracting model parameters."
 elif [ "$mode" = "full" ]; then
     echo "Downloading model parameters (full mode)..."
     wget -c http://ftp.cbi.pku.edu.cn/pub/SVEN/model_params_full.tar.gz
     echo "Extracting model parameters..."
-    tar -xzf model_parameters_full.tar.gz
+    tar -xzf model_params_full.tar.gz
     echo "Finished extracting model parameters."
 fi
 echo "All resources have been downloaded and extracted."
