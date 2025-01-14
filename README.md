@@ -31,6 +31,7 @@ cd SVEN
 sh download_resources.sh # ~2G
 # For full mode
 sh download_resources.sh -m full # ~380G
+# You can also download necessary files through http://ftp.cbi.pku.edu.cn/pub/SVEN/ directly.
 ```
 
 We recommend using mamba or conda environment. Please check install instructions of mamba from https://github.com/mamba-org/mamba, Tensorflow from https://www.tensorflow.org/ and bedtools from https://bedtools.readthedocs.io/ for more details. 
