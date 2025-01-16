@@ -51,7 +51,14 @@ def extract_tss_bed():
 
 def extract_sv_bed():
     chr_gene_dict = generate_chr_gene_dict(args.ignore_rRNA)
-    input_file = np.loadtxt(args.inputfile, delimiter="\t", dtype = str, skiprows = 1)
+    # check header of input file: start with # or not
+    with open(args.inputfile, 'r') as f:
+        header = f.readline()
+        if header[0] == "#":
+            skiprows = 0
+        else:
+            skiprows = 1
+    input_file = np.loadtxt(args.inputfile, delimiter="\t", dtype = str, skiprows = skiprows)
     ref_bed = [] # list for sv info
     sv_allele = [] # list for ref allele and alt allele
 
@@ -108,13 +115,24 @@ def extract_sv_bed():
             sv_allele.append([ref_allele, alt_allele])
     ref_bed = np.array(ref_bed)
     sv_allele = np.array(sv_allele)
+    if ref_bed.shape[0] == 0:
+        raise Exception("##### Warning: No SVs in 131kb region of any gene. Exit. #####")
+    else:
+        print("##### Construct %d SV-gene pairs. #####" % ref_bed.shape[0])
     # save files
     np.savetxt(args.work_dir + "temp.bed", ref_bed, delimiter = "\t", fmt = "%s")
     np.savetxt(args.work_dir + "temp_sv_allele.txt", sv_allele, delimiter = "\t", fmt = "%s")
     print("##### Success: extract bed file. #####")
 
 def extract_snv_bed():
-    input_file = np.loadtxt(args.inputfile, delimiter="\t", dtype = str, skiprows = 1)
+    # check header of input file: start with # or not
+    with open(args.inputfile, 'r') as f:
+        header = f.readline()
+        if header[0] == "#":
+            skiprows = 0
+        else:
+            skiprows = 1
+    input_file = np.loadtxt(args.inputfile, delimiter="\t", dtype = str, skiprows = skiprows)
     output = []
     for x in range(input_file.shape[0]):
         chr_info = input_file[x][0]
@@ -146,7 +164,9 @@ def extract_seq():
     out_fasta = args.work_dir + "temp.fa"
     # ignore strand information here
     cmd = args.bedtools_path + ' getfasta -fi %s -bed %s -fo %s' % (ref_genome, in_bed, out_fasta)
-    subprocess.call(cmd, shell=True)
+    return_code = subprocess.call(cmd, shell=True)
+    if return_code != 0:
+        raise Exception("##### Error: extract sequences from bed file. Exit. #####")
     print("##### Success: extract sequences from bed file. #####")
 
 def snv_to_h5():
