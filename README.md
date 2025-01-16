@@ -44,7 +44,7 @@ conda create -n sven python=3.10
 conda activate sven
 
 # Install bedtools
-conda install bioconda::bedtools
+conda install bioconda::bedtools=2.26.0
 
 # Install tensorflow with cuda 12
 pip3 install --user "tensorflow[and-cuda]"==2.16.1
@@ -53,6 +53,8 @@ pip3 install tensorflow==2.16.1
 
 # Install the other dependencies
 pip3 install -r requirements.txt
+pip3 install tf_keras==2.16.0 --no-deps
+pip3 install tensorflow_hub==0.16.1 --no-deps
 ```
 
 
