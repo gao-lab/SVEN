@@ -23,7 +23,7 @@ parser.add_argument('--seq_len', type = int, default = 131072, help = 'Input seq
 parser.add_argument('--batch_size', type = int, default = 16, help = 'Batch size, default is 16.')
 parser.add_argument('--gpu', type = str, default = "-1", help = 'GPU id, default is -1 (CPU)')
 parser.add_argument('--model_path', type = str, default = "./model_params/", help = 'Model parameters path, default is ./model_params/')
-parser.add_argument('--resume', type = str, default = "true", help = 'Conintue prediction or start new prediction, default is true.')
+parser.add_argument('--resume', type = str, default = "false", help = 'Conintue prediction or start new prediction, default is false.')
 args = parser.parse_args()
 
 # select GPU or CPU
