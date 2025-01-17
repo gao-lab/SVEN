@@ -116,6 +116,12 @@ python predict_expression.py --target_idx 3 --type sv # with target model
 | Input file and output files | Description |
 | --- | --- |
 | ```./example/test_sv.vcf``` | Input SV file. Columns: chromosome, position (1-based), ref allele, alt allele, sv info. |
+| ```./work_dir``` | Default work folder. You can change it by --work_dir. |
+| ```./work_dir/temp_bed``` | Processed bed file of input. | 
+| ```./work_dir/temp.h5``` | One-hot encoded sequences of input. |
+| ```./work_dir/temp_sv_allele.txt``` | Reference allele and alternative alleles of SV. |
+| ```./work_dir/annotations``` | Folder for predicted annotations. |
+| ```./work_dir/annotations/transformed``` | Folder for transformed annotations. |
 | ```./work_dir/output/exp_ref.txt``` | Predicted gene expression level for ref allele in target cell line (log10 scale). |
 | ```./work_dir/output/exp_alt.txt``` | Predicted gene expression level for alt allele in target cell line (log10 scale). |
 | ```./work_dir/output/exp_log2fc.txt``` | Predicted effects of SVs on gene expression level in target cell line (log2 fold change). |
